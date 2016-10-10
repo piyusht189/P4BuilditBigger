@@ -18,6 +18,7 @@ import piyush.almanac.jokefactory.DisplayJokeActivity;
  */
 public class MainActivityFragment extends Fragment {
     ProgressBar progressBar = null;
+    public boolean testFlag = false;
     public String loadedJoke = null;
     public MainActivityFragment() {
     }
@@ -49,7 +50,8 @@ public class MainActivityFragment extends Fragment {
         new EndpointAsyncTask().execute(this);
     }
 
-    public void launchDisplayJokeActivity(){
+    public void launchDisplayJokeActivity() {
+        if (!testFlag) {
             Context context = getActivity();
             Intent intent = new Intent(context, DisplayJokeActivity.class);
             intent.putExtra(context.getString(R.string.jokeEnvelope), loadedJoke);
@@ -57,6 +59,7 @@ public class MainActivityFragment extends Fragment {
             context.startActivity(intent);
             progressBar.setVisibility(View.GONE);
 
+        }
     }
 
 }

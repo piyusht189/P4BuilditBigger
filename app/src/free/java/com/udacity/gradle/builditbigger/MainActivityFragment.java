@@ -25,6 +25,7 @@ import piyush.almanac.jokefactory.DisplayJokeActivity;
 public class MainActivityFragment extends Fragment {
     ProgressBar progressBar = null;
     public String loadedJoke = null;
+    public boolean testFlag = false;
     PublisherInterstitialAd mPublisherInterstitialAd;
     public MainActivityFragment() {
 
@@ -108,13 +109,15 @@ public class MainActivityFragment extends Fragment {
         new EndpointAsyncTask().execute(this);
     }
 
-    public void launchDisplayJokeActivity(){
-        Context context = getActivity();
-        Intent intent = new Intent(context, DisplayJokeActivity.class);
-        intent.putExtra(context.getString(R.string.jokeEnvelope), loadedJoke);
-        //Toast.makeText(context, loadedJoke, Toast.LENGTH_LONG).show();
-        context.startActivity(intent);
-        progressBar.setVisibility(View.GONE);
+    public void launchDisplayJokeActivity() {
+        if (!testFlag) {
+            Context context = getActivity();
+            Intent intent = new Intent(context, DisplayJokeActivity.class);
+            intent.putExtra(context.getString(R.string.jokeEnvelope), loadedJoke);
+            //Toast.makeText(context, loadedJoke, Toast.LENGTH_LONG).show();
+            context.startActivity(intent);
+            progressBar.setVisibility(View.GONE);
+        }
     }
     private void requestNewInterstitial() {
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder()
